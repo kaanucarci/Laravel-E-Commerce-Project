@@ -70,12 +70,12 @@
                             </td>
                             <td>{{$product->regular_price}}</td>
                             <td>{{$product->sale_price}}</td>
-                            <td>{{$product->sku}}</td>
+                            <td>{{$product->SKU}}</td>
                             <td>{{$product->category->name}}</td>
                             <td>{{$product->brand->name}}</td>
                             <td>{{$product->featured == 0 ? 'No' : 'Yes'}}</td>
-                            <td>{{$product->instock == 0 ? 'Out of Stock' : 'In Stock' }}</td>
-                            <td>{{$product->category->quantity}}</td>
+                            <td>{{$product->stock_status == 'instock' ? 'In Stock' : 'Out of Stock' }}</td>
+                            <td>{{$product->quantity}}</td>
                             <td>
                                 <div class="list-icon-function">
                                     <a href="#" target="_blank">
@@ -83,12 +83,14 @@
                                             <i class="icon-eye"></i>
                                         </div>
                                     </a>
-                                    <a href="#">
+                                    <a href="{{route('admin.product.edit', ['id'=>$product->id])}}">
                                         <div class="item edit">
                                             <i class="icon-edit-3"></i>
                                         </div>
                                     </a>
-                                    <form action="#" method="POST">
+                                    <form action="{{route('admin.product.delete', ['id'=>$product->id])}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <div class="item text-danger delete">
                                             <i class="icon-trash-2"></i>
                                         </div>
@@ -111,3 +113,31 @@
     </div>
 
 @endsection
+
+
+
+
+@push('scripts')
+    <script>
+        $(function () {
+
+            $('body').on('click', '.delete', function (e) {
+                e.preventDefault();
+                const form = $(this).parents('form');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                })
+            });
+        });
+    </script>
+@endpush
