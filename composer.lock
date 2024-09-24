@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a56184a9f12d658e7fe227cd9f1baa19",
+    "content-hash": "9857cc7afbac9ac77be838c4ceb73078",
     "packages": [
         {
             "name": "brick/math",
@@ -3388,6 +3388,69 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "surfsidemedia/shoppingcart",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/surfsidemedia/LaravelShoppingcart.git",
+                "reference": "2f037db566066d8f029c6edd9c66db3a7cc55224"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/surfsidemedia/LaravelShoppingcart/zipball/2f037db566066d8f029c6edd9c66db3a7cc55224",
+                "reference": "2f037db566066d8f029c6edd9c66db3a7cc55224",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/events": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6|^7|^8|^9|^10|^11",
+                "illuminate/session": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6|^7|^8|^9|^10|^11",
+                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6|^7|^8|^9|^10|^11"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.6",
+                "orchestra/testbench": "~3.1",
+                "phpunit/phpunit": "~5.0 || ~6.0 || ~7.0 || ~10.0 || ^10.5"
+            },
+            "suggest": {
+                "Surfsidemedia/notify": "Simple flash notifications for Laravel"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Surfsidemedia\\Shoppingcart\\ShoppingcartServiceProvider"
+                    ],
+                    "aliases": {
+                        "Cart": "Surfsidemedia\\Shoppingcart\\Facades\\Cart"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Surfsidemedia\\Shoppingcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sudhir Kumar"
+                }
+            ],
+            "description": "Laravel Shoppingcart",
+            "keywords": [
+                "laravel",
+                "shoppingcart"
+            ],
+            "support": {
+                "issues": "https://github.com/surfsidemedia/LaravelShoppingcart/issues",
+                "source": "https://github.com/surfsidemedia/LaravelShoppingcart/tree/v1.0.0"
+            },
+            "time": "2024-03-19T17:25:32+00:00"
         },
         {
             "name": "symfony/clock",
