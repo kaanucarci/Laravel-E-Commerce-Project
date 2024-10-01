@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,15 @@ Route::get('/shop/{product_slug}', [ShopController::class, 'ProductDetails'])->n
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'AddToCart'])->name('cart.add');
+Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'IncreaseCartQuantity'])->name('cart.qty.increase');
+Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'DecreaseCartQuantity'])->name('cart.qty.decrease');
+Route::delete('/cart/remove/{rowId}', [CartController::class, 'RemoveItem'])->name('cart.item.remove');
+Route::delete('/cart/remove-all', [CartController::class, 'EmptyCart'])->name('cart.item.remove-all');
+
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::post('/wishlist/add', [WishlistController::class, 'AddToWishlist'])->name('wishlist.add');
+Route::post('/wishlist/remove', [WishlistController::class, 'RemoveFromWishlist'])->name('wishlist.remove');
+
 
 Route::middleware(['auth'])->group(function (){
    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
