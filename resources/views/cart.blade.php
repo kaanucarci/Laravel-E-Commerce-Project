@@ -96,14 +96,31 @@
                     @endforeach
                     </tbody>
                 </table>
+                    @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{Session::get('success')}}
+                        </div>
+                    @elseif(Session::has('error'))
+                        <div class="alert alert-danger">
+                            {{Session::get('error')}}
+                        </div>
+                    @endif
                 <div class="cart-table-footer">
-                    <form action="{{route('cart.coupon.apply')}}" method="post" class="position-relative bg-body">
-                        @csrf
-                        <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value="@if(Session::has('coupon')) {{Session::get('coupon')['code']}} Applied! @endif">
-                        <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
-                               value="APPLY COUPON">
-                    </form>
-
+                    @if (!Session::has('coupon'))
+                        <form action="{{route('cart.coupon.apply')}}" method="post" class="position-relative bg-body">
+                            @csrf
+                            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value="@if(Session::has('coupon')) {{Session::get('coupon')['code']}} Applied! @endif">
+                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
+                                   value="APPLY COUPON">
+                        </form>
+                    @else
+                        <form action="{{route('cart.coupon.remove')}}" method="post" class="position-relative bg-body">
+                            @csrf
+                            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value="@if(Session::has('coupon')) {{Session::get('coupon')['code']}} Applied! @endif">
+                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
+                                   value="REMOVE COUPON">
+                        </form>
+                    @endif
                     <form action="{{route('cart.item.remove-all')}}" method="POST">
                         @csrf
                         @method('delete')
@@ -111,20 +128,12 @@
                     </form>
                 </div>
             </div>
-            @if(Session::has('success'))
-                <div class="alert alert-success">
-                    {{Session::get('success')}}
-                </div>
-            @elseif(Session::has('error'))
-                <div class="alert alert-danger">
-                    {{Session::get('error')}}
-                </div>
-            @endif
+
             <div class="shopping-cart__totals-wrapper">
                 <div class="sticky-content">
                     <div class="shopping-cart__totals">
                         <h3>Cart Totals</h3>
-                        @if(Session::has('discounts'))
+                        @if(Session::has('discounts') && Session::has('coupon'))
                             <table class="cart-totals">
                                 <tbody>
                                 <tr>

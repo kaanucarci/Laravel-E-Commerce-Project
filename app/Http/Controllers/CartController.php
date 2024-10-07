@@ -73,7 +73,7 @@ class CartController extends Controller
                 ]);
 
                 $this->CalculateDiscount();
-                return redirect()->back()->with('status', 'Coupon Applied Successfully');
+                return redirect()->back()->with('success', 'Coupon Applied Successfully');
             }
         }
         else
@@ -107,5 +107,11 @@ class CartController extends Controller
         else{
 
         }
+    }
+
+    public function RemoveCoupon(){
+        Session::forget('coupon');
+        Session::forget('discount');
+        return redirect()->back()->with('success', 'Coupon Removed Successfully');
     }
 }
