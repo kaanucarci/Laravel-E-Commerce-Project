@@ -36,6 +36,9 @@ Route::delete('/wishlist/remove/{rowId}', [WishlistController::class, 'RemoveIte
 Route::delete('/wishlist/remove-all', [WishlistController::class, 'EmptyWishlist'])->name('wishlist.item.remove-all');
 
 
+Route::get('/checkout', [CartController::class, 'Checkout'])->name('cart.checkout');
+
+
 Route::middleware(['auth'])->group(function (){
    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 });

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Coupon;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -113,5 +115,16 @@ class CartController extends Controller
         Session::forget('coupon');
         Session::forget('discount');
         return redirect()->back()->with('success', 'Coupon Removed Successfully');
+    }
+
+    public function Checkout()
+    {
+        if (!Auth::check())
+        {
+            return redirect()->route('login');
+        }
+
+        $address = Address::where('user_id' , Auth::user()->id)->where('isdefault' , 1)->first();
+        return view('checkout', compact('address'));
     }
 }
