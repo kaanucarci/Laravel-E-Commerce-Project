@@ -37,7 +37,8 @@ Route::delete('/wishlist/remove-all', [WishlistController::class, 'EmptyWishlist
 
 
 Route::get('/checkout', [CartController::class, 'Checkout'])->name('cart.checkout');
-
+Route::post('/place-an-order', [CartController::class, 'PlaceAnOrder'])->name('cart.place.an.order');
+Route::get('/order-confirmation', [CartController::class, 'OrderConfirmation'])->name('cart.order.confirmation');
 
 Route::middleware(['auth'])->group(function (){
    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');

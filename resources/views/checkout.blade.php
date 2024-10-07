@@ -27,7 +27,8 @@
           </span>
                 </a>
             </div>
-            <form name="checkout-form" action="javascript:void(0);">
+            <form name="checkout-form" action="{{route('cart.place.an.order')}}" method="POST">
+                @csrf
                 <div class="checkout-form">
                     <div class="billing-info__wrapper">
                         <div class="row">
@@ -62,7 +63,7 @@
                                     <input type="text" class="form-control" name="name" required="" value="{{old('name')}}">
                                     <label for="name">Full Name *</label>
                                     <span class="text-danger"></span>
-                                    @error('name') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -70,7 +71,7 @@
                                     <input type="text" class="form-control" name="phone" required="" value="{{old('phone')}}">
                                     <label for="phone">Phone Number *</label>
                                     <span class="text-danger"></span>
-                                    @error('phone') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -78,7 +79,7 @@
                                     <input type="text" class="form-control" name="zip" required="" value="{{old('zip')}}">
                                     <label for="zip">Pincode *</label>
                                     <span class="text-danger"></span>
-                                    @error('zip') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('zip') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -86,7 +87,7 @@
                                     <input type="text" class="form-control" name="state" required="" value="{{old('state')}}">
                                     <label for="state">State *</label>
                                     <span class="text-danger"></span>
-                                    @error('state') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('state') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -94,7 +95,7 @@
                                     <input type="text" class="form-control" name="city" required="" value="{{old('city')}}">
                                     <label for="city">Town / City *</label>
                                     <span class="text-danger"></span>
-                                    @error('city') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('city') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -102,7 +103,7 @@
                                     <input type="text" class="form-control" name="address" required="" value="{{old('address')}}">
                                     <label for="address">House no, Building Name *</label>
                                     <span class="text-danger"></span>
-                                    @error('address') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('address') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -110,7 +111,7 @@
                                     <input type="text" class="form-control" name="locality" required="" value="{{old('locality')}}">
                                     <label for="locality">Road Name, Area, Colony *</label>
                                     <span class="text-danger"></span>
-                                    @error('locality') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('locality') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -118,7 +119,7 @@
                                     <input type="text" class="form-control" name="landmark" required="" value="{{old('landmark')}}">
                                     <label for="landmark">Landmark *</label>
                                     <span class="text-danger"></span>
-                                    @error('landmark') <span class="alert alert-danger text-center">{{ $message }}</span> @enderror
+                                    @error('landmark') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -202,50 +203,24 @@
                             </div>
                             <div class="checkout__payment-methods">
                                 <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                           id="checkout_payment_method_1" checked>
-                                    <label class="form-check-label" for="checkout_payment_method_1">
-                                        Direct bank transfer
-                                        <p class="option-detail">
-                                            Make your payment directly into our bank account. Please use your Order ID as the payment
-                                            reference.Your order will not be shipped until the funds have cleared in our account.
-                                        </p>
+                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode" value="card"
+                                           id="mode1">
+                                    <label class="form-check-label" for="mode1">
+                                        Debit or Credit Card
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                           id="checkout_payment_method_2">
-                                    <label class="form-check-label" for="checkout_payment_method_2">
-                                        Check payments
-                                        <p class="option-detail">
-                                            Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                                            aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                                            magna posuere eget.
-                                        </p>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                           id="checkout_payment_method_3">
-                                    <label class="form-check-label" for="checkout_payment_method_3">
-                                        Cash on delivery
-                                        <p class="option-detail">
-                                            Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                                            aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                                            magna posuere eget.
-                                        </p>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                           id="checkout_payment_method_4">
-                                    <label class="form-check-label" for="checkout_payment_method_4">
+                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"  value="paypal"
+                                           id="mode2">
+                                    <label class="form-check-label" for="mode2">
                                         Paypal
-                                        <p class="option-detail">
-                                            Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                                            aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                                            magna posuere eget.
-                                        </p>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"  value="cod"
+                                           id="mode3">
+                                    <label class="form-check-label" for="mode3">
+                                        Cash on delivery
                                     </label>
                                 </div>
                                 <div class="policy-text">
