@@ -42,6 +42,8 @@ Route::get('/order-confirmation', [CartController::class, 'OrderConfirmation'])-
 
 Route::middleware(['auth'])->group(function (){
    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+   Route::get('/account-dashboard/orders', [UserController::class, 'Orders'])->name('user.orders');
+   Route::get('/account-dashboard/order/{order_id}/details', [UserController::class, 'OrderDetails'])->name('user.order.details');
 });
 
 
@@ -74,4 +76,8 @@ Route::middleware(['auth', AuthAdmin::class])->group(function (){
     Route::get('/admin/coupon/edit/{id}', [AdminController::class, 'EditCoupon'])->name('admin.coupon.edit');
     Route::put('/admin/coupon/update', [AdminController::class, 'UpdateCoupon'])->name('admin.coupon.update');
     Route::delete('/admin/coupon/{id}/delete', [AdminController::class, 'DeleteCoupon'])->name('admin.coupon.delete');
+
+    Route::get('/admin/orders', [AdminController::class, 'Orders'])->name('admin.orders');
+    Route::get('/admin/order/{order_id}/details', [AdminController::class, 'OrderDetails'])->name('admin.order.details');
+    Route::put('/admin/order/update-status', [AdminController::class, 'UpdateOrderStatus'])->name('admin.order.update-status');
 });
