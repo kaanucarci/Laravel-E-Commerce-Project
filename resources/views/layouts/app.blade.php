@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins/swiper.min.css')}}" type="text/css"/>
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" type="text/css"/>
     <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
           crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -321,7 +322,7 @@
                         <a href="about.html" class="navigation__link">About</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="contact.html" class="navigation__link">Contact</a>
+                        <a href="{{route('contact')}}" class="navigation__link">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -389,7 +390,7 @@
     <div class="container">
         <div class="header-desk header-desk_type_1">
             <div class="logo">
-                <a href="index.html">
+                <a href="{{route('home.index')}}">
                     <img src="{{asset('assets/images/logo.png')}}" alt="Uomo" class="logo__image d-block"/>
                 </a>
             </div>
@@ -409,7 +410,7 @@
                         <a href="about.html" class="navigation__link">About</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="contact.html" class="navigation__link">Contact</a>
+                        <a href="{{route('contact')}}" class="navigation__link">Contact</a>
                     </li>
                 </ul>
             </nav>
@@ -682,6 +683,8 @@
 <script src="{{asset('assets/js/plugins/swiper.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/countdown.js')}}"></script>
 <script src="{{asset('assets/js/theme.js')}}"></script>
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 @stack("scripts")
 </body>
 

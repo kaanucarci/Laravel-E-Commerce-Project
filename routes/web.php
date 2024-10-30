@@ -40,10 +40,13 @@ Route::get('/checkout', [CartController::class, 'Checkout'])->name('cart.checkou
 Route::post('/place-an-order', [CartController::class, 'PlaceAnOrder'])->name('cart.place.an.order');
 Route::get('/order-confirmation', [CartController::class, 'OrderConfirmation'])->name('cart.order.confirmation');
 
+Route::get('/contact', [HomeController::class, 'Contact'])->name('contact');
+
 Route::middleware(['auth'])->group(function (){
    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
    Route::get('/account-dashboard/orders', [UserController::class, 'Orders'])->name('user.orders');
    Route::get('/account-dashboard/order/{order_id}/details', [UserController::class, 'OrderDetails'])->name('user.order.details');
+   Route::put('/account-dashboard/order/cancel-order', [UserController::class, 'OrderCancel'])->name('user.order.cancel');
 });
 
 
@@ -80,4 +83,11 @@ Route::middleware(['auth', AuthAdmin::class])->group(function (){
     Route::get('/admin/orders', [AdminController::class, 'Orders'])->name('admin.orders');
     Route::get('/admin/order/{order_id}/details', [AdminController::class, 'OrderDetails'])->name('admin.order.details');
     Route::put('/admin/order/update-status', [AdminController::class, 'UpdateOrderStatus'])->name('admin.order.update-status');
+
+    Route::get('admin/slides', [AdminController::class, 'Slide'])->name('admin.slides');
+    Route::get('admin/slide/add', [AdminController::class, 'AddSlide'])->name('admin.slide.add');
+    Route::post('admin/slide/store', [AdminController::class, 'StoreSlide'])->name('admin.slide.store');
+    Route::get('admin/slide/edit/{id}', [AdminController::class, 'EditSlide'])->name('admin.slide.edit');
+    Route::put('admin/slide/update', [AdminController::class, 'UpdateSlide'])->name('admin.slide.update');
+    Route::delete('admin/slide/{id}/delete', [AdminController::class, 'DeleteSlide'])->name('admin.slide.delete');
 });

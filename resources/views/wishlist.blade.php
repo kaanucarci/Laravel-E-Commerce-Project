@@ -73,14 +73,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <div class="cart-table-footer">
-                        <form action="#" class="position-relative bg-body">
-                            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code">
-                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
-                                   value="APPLY COUPON">
-                        </form>
-                        <button class="btn btn-light">UPDATE CART</button>
-                    </div>
+
                 </div>
                 @else
                   <div class="row">

@@ -108,6 +108,9 @@
                 </div>
 
                 <div class="col-lg-10">
+                    @if(Session::has('status'))
+                        <div class="alert alert-success text-center">{{Session::get('status')}}</div>
+                    @endif
                     <div class="wg-box mt-5 mb-5">
                         <div class="row">
                             <div class="col-6">
@@ -116,6 +119,7 @@
                             <div class="col-6 text-right">
                                 <a class="btn btn-sm btn-danger" href="{{route('user.orders')}}">Back</a>
                             </div>
+
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-transaction">
@@ -251,14 +255,14 @@
                                         <td>{{$transaction->mode}}</td>
                                         <th>Status</th>
                                         <td>
-                                            @if($order->status == 'approved')
+                                            @if($transaction->status == 'approved')
                                                 <span class="badge bg-success">Approved</span>
-                                            @elseif($order->status == 'declinded')
+                                            @elseif($transaction->status == 'declined')
                                                 <span class="badge bg-danger">Declined</span>
-                                            @elseif($order->status == 'refunded')
+                                            @elseif($transaction->status == 'refunded')
                                                 <span class="badge bg-secondary">Refunded</span>
                                             @else
-                                                <span class="badge bg-warning">Pending</span>
+                                                <span class="badge bg-warning">Pending </span>
                                             @endif
                                         </td>
                                     </tr>
@@ -267,13 +271,16 @@
                         </div>
                     </div>
 
-                    <div class="wg-box mt-5 text-right">
-                        <form action="http://localhost:8000/account-order/cancel-order" method="POST">
-                            <input type="hidden" name="_token" value="3v611ELheIo6fqsgspMOk0eiSZjncEeubOwUa6YT" autocomplete="off">
-                            <input type="hidden" name="_method" value="PUT"> <input type="hidden" name="order_id" value="1">
-                            <button type="submit" class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
+                    @if($order->status == 'ordered')
+                        <div class="wg-box mt-5 text-right">
+                            <form action="{{route('user.order.cancel')}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="order_id" value="{{$order->id}}">
+                                <button type="button" class="btn btn-danger delete">Cancel Order</button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
 
             </div>
@@ -281,3 +288,29 @@
     </main>
 
 @endsection
+
+@push('scripts')
+    <script>
+        $(function () {
+
+            $('body').on('click', '.delete', function (e) {
+                e.preventDefault();
+                const form = $(this).parents('form');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                })
+            });
+        });
+    </script>
+@endpush
+
