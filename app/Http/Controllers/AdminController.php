@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -46,6 +47,8 @@ class AdminController extends Controller
         $totalOrderedAmount = collect($monthlyDatas)->sum('TotalOrderedAmount');
         $totalDeliveredAmount = collect($monthlyDatas)->sum('TotalDeliveredAmount');
         $totalCanceledAmount = collect($monthlyDatas)->sum('TotalCanceledAmount');
+
+
 
         return view('admin.index', compact('orders', 'AmountM', 'orderAmountM', 'deliveredAmountM', 'canceledAmountM', 'totalAmount', 'totalOrderedAmount', 'totalDeliveredAmount', 'totalCanceledAmount'));
     }
@@ -679,6 +682,35 @@ class AdminController extends Controller
         }
         $slide->delete();
         return redirect()->route('admin.slides')->with('status', 'Slide Deleted Successfully');
+    }
+
+
+    public function ContactMessages()
+    {
+        $messages = Contact::orderBy('created_at', 'DESC')->paginate(10);
+        return view('admin.contacts', compact('messages'));
+    }
+
+    public function ContactDetails($message_id)
+    {
+        $message = Contact::find($message_id);
+
+        if ($message->is_read == 0)
+        {
+            $message->is_read = 1;
+            $message->save();
+        }
+
+        return view('admin.message-details', compact('message'));
+
+    }
+
+
+    public function DeleteMessage($message_id)
+    {
+        $message = Contact::find($message_id);
+        $message->delete();
+        return redirect()->route('admin.contact')->with('status', 'Message Deleted Successfully');
     }
 
 }

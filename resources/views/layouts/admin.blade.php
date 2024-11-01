@@ -153,6 +153,16 @@
                                 </a>
                             </li>
 
+                            <li class="menu-item position-relative">
+                                <a href="{{route('admin.contact')}}" class="">
+                                    <div class="icon "><i class="icon-message-square"></i></div>
+                                    <div class="text">Messages</div>
+                                    <span class="text-white bg-danger end-0 top-0 p-2 fw-bold fs-5 position-absolute rounded-circle text-center" style="">
+                                        {{\App\Models\Contact::where('is_read',0)->count()}}
+                                    </span>
+                                </a>
+                            </li>
+
                             <li class="menu-item">
                                 <a href="settings.html" class="">
                                     <div class="icon"><i class="icon-settings"></i></div>
