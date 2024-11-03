@@ -456,7 +456,7 @@
                         <form action="javascript:void(0)" method="GET" class="search-field container">
                             <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                             <div class="position-relative">
-                                <input class="search-field__input search-popup__input w-100 fw-medium" id="search-input" type="text"
+                                <input autocomplete="off" class="search-field__input search-popup__input w-100 fw-medium" id="search-input" type="text"
                                        name=query" placeholder="Search products"/>
                                 <button class="btn-icon search-popup__submit" type="submit">
                                     <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -645,6 +645,8 @@
 <script src="{{asset('assets/js/plugins/swiper.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/countdown.js')}}"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script src="{{asset('assets/js/theme.js')}}"></script>
 <script>
     $(function () {

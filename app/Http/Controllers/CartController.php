@@ -127,14 +127,14 @@ class CartController extends Controller
             return redirect()->route('login');
         }
 
-        $address = Address::where('user_id' , Auth::user()->id)->where('isdefault' , 1)->first();
+        $address = Address::where('user_id' , Auth::user()->id)->where('default_address' , 1)->first();
         return view('checkout', compact('address'));
     }
 
     public function PlaceAnOrder(Request $request)
     {
         $user_id = Auth::user()->id;
-        $address = Address::where('user_id' , $user_id)->where('isdefault' , 1)->first();
+        $address = Address::where('user_id' , $user_id)->where('default_address' , 1)->first();
 
         if (!$address)
         {

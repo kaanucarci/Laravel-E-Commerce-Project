@@ -50,6 +50,15 @@ Route::middleware(['auth'])->group(function (){
    Route::get('/account-dashboard/orders', [UserController::class, 'Orders'])->name('user.orders');
    Route::get('/account-dashboard/order/{order_id}/details', [UserController::class, 'OrderDetails'])->name('user.order.details');
    Route::put('/account-dashboard/order/cancel-order', [UserController::class, 'OrderCancel'])->name('user.order.cancel');
+
+   Route::get('/account-dashboard/address', [UserController::class, 'Address'])->name('user.address');
+   Route::get('/account-dashboard/address/create', [UserController::class, 'AddressCreate'])->name('user.address.create');
+   Route::post('/account-dashboard/address/store', [UserController::class, 'AddressStore'])->name('user.address.store');
+   Route::get('/account-dashboard/address/edit/{id}', [UserController::class, 'AddressEdit'])->name('user.address.edit');
+   Route::put('/account-dashboard/address/update', [UserController::class, 'AddressUpdate'])->name('user.address.update');
+   Route::delete('/account-dashboard/address/{id}/delete', [UserController::class, 'AddressDelete'])->name('user.address.delete');
+
+   Route::put('account-dashboard/address/default/{id}', [UserController::class, 'AddressDefault'])->name('user.address.default');
 });
 
 

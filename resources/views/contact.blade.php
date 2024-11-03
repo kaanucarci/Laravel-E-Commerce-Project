@@ -23,7 +23,7 @@
                             </div>
                         @endif
                         <div class="form-floating my-4">
-                            <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Name *" required="">
+                            <input type="text" autocomplete="off" class="form-control" name="name" value="{{old('name')}}" placeholder="Name *" required="">
                             <label for="contact_us_name">Name *</label>
                             <span class="text-danger">
                                 @error('name')
@@ -32,7 +32,7 @@
                             </span>
                         </div>
                         <div class="form-floating my-4">
-                            <input type="text" class="form-control" name="phone" maxlength="10" value="{{old('phone')}}" placeholder="Phone *" required="">
+                            <input type="text" autocomplete="off" class="form-control" name="phone" maxlength="10" value="{{old('phone')}}" placeholder="Phone *" required="">
                             <label for="contact_us_name">Phone *</label>
                             <span class="text-danger">
                                 @error('phone')
@@ -41,7 +41,7 @@
                             </span>
                         </div>
                         <div class="form-floating my-4">
-                            <input type="email" class="form-control" name="email" value="{{old('email')}}" placeholder="Email address *" required="">
+                            <input type="email" autocomplete="off" class="form-control" name="email" value="{{old('email')}}" placeholder="Email address *" required="">
                             <label for="contact_us_name">Email address *</label>
                             <span class="text-danger">
                                 @error('email')

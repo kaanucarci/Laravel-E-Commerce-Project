@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
@@ -43,5 +44,98 @@ class UserController extends Controller
         $transaction->save();
 
         return back()->with('status', 'Order cancelled successfully');
+    }
+
+    public function Address()
+    {
+        $addresses = Address::where('user_id', Auth::user()->id)->paginate(3);
+        return view('user.account-address', compact('addresses'));
+    }
+
+    public function AddressCreate()
+    {
+        return view('user.account-address-create');
+    }
+
+    public function AddressStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required|numeric|digits:11',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required|numeric|digits:6',
+            'locality' => 'required',
+            'landmark' => 'required'
+        ]);
+
+        $address = new Address();
+        $address->user_id = Auth::user()->id;
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->address = $request->address;
+        $address->city = $request->city;
+        $address->state = $request->state;
+        $address->zip = $request->zip;
+        $address->locality = $request->locality;
+        $address->landmark = $request->landmark;
+        $address->country = 'Turkey';
+        $address->save();
+
+        return redirect()->route('user.address')->with('status', 'Address added successfully');
+    }
+
+    public function AddressEdit($address_id)
+    {
+        $address = Address::find($address_id);
+        return view('user.account-address-edit', compact('address'));
+    }
+
+    public function AddressUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required|numeric|digits:11',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required|numeric|digits:6',
+            'locality' => 'required',
+            'landmark' => 'required'
+        ]);
+
+        $address = Address::find($request->address_id);
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->address = $request->address;
+        $address->city = $request->city;
+        $address->state = $request->state;
+        $address->zip = $request->zip;
+        $address->locality = $request->locality;
+        $address->landmark = $request->landmark;
+        $address->save();
+
+        return redirect()->route('user.address')->with('status', 'Address updated successfully');
+
+    }
+
+
+    public function AddressDefault(Request $request, $address_id)
+    {
+       $addresses = Address::where('default_address', 1)->where('user_id', Auth::user()->id)->get();
+
+       foreach ($addresses as $address) {
+           $address->default_address = 0;
+           $address->save();
+       }
+
+       $address = Address::find($address_id);
+       if ($address)
+       {
+           $address->default_address = 1;
+           $address->save();
+       }
+
     }
 }

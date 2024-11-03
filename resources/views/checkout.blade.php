@@ -19,7 +19,7 @@
             <em>Checkout Your Items List</em>
           </span>
                 </a>
-                <a href="order-confirmation.html" class="checkout-steps__item">
+                <a href="javascript:void(0)" class="checkout-steps__item">
                     <span class="checkout-steps__item-number">03</span>
                     <span class="checkout-steps__item-title">
             <span>Confirmation</span>
@@ -225,11 +225,11 @@
                                 </div>
                                 <div class="policy-text">
                                     Your personal data will be used to process your order, support your experience throughout this
-                                    website, and for other purposes described in our <a href="terms.html" target="_blank">privacy
+                                    website, and for other purposes described in our <a href="javascript:void(0)" target="_blank">privacy
                                         policy</a>.
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-checkout">PLACE ORDER</button>
+                            <button class="btn btn-primary btn-checkout" type="submit">PLACE ORDER</button>
                         </div>
                     </div>
                 </div>

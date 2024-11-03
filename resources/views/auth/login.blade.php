@@ -16,7 +16,7 @@
                         <form method="POST" action="{{ route('login') }}" name="login-form" class="needs-validation" novalidate="">
                             @csrf
                             <div class="form-floating mb-3">
-                                <input class="form-control form-control_gray @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required="" autocomplete="email" autofocus="">
+                                <input class="form-control form-control_gray @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" autocomplete="off" required="" autocomplete="email" autofocus="">
                                 <label for="email">Email address *</label>
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -30,7 +30,7 @@
                             <div class="pb-3"></div>
 
                             <div class="form-floating mb-3">
-                                <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required=""
+                                <input id="password" type="password"  class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required=""
                                        autocomplete="current-password">
                                 <label for="customerPasswodInput">Password *</label>
                                 @error('password')
